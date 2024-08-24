@@ -1,0 +1,72 @@
+select*
+from [SalesLT].[Sample_Data_Ingestion]
+order by orderid asc;
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+SET Country = 'USA'
+WHERE Location IN ('New York', 'Los Angeles', 'Houston', 'Chicago');
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+SET Country = 'India'
+WHERE Location = 'Mumbai';
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+SET Location = 'New York'
+WHERE Country = 'USA' AND Location NOT IN ('New York', 'Los Angeles', 'Houston', 'Chicago');
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+SET Location = 'Mumbai'
+WHERE Country = 'India' AND Location != 'Mumbai';
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+ALTER TABLE [SalesLT].[Sample_Data_Ingestion]
+ADD LocationCountry VARCHAR(255);
+SET LocationCountry = CONCAT(Location, ', ', Country);
+UPDATE [SalesLT].[Sample_Data_Ingestion]
+ALTER TABLE [SalesLT].[Sample_Data_Ingestion]
+ADD ProductTotalPrice float;
+SET ProductTotalPrice = Quantity + Price;
+select SUM(Quantity * Price) AS TotalSales
+from [SalesLT].[Sample_Data_Ingestion];
+select AVG(Quantity * Price) as averageordervalue
+from [SalesLT].[Sample_Data_Ingestion];
+select COUNT(Orderid) as totalorder
+from [SalesLT].[Sample_Data_Ingestion];
+select SUM(Quantity) as totalQuantitySold
+from [SalesLT].[Sample_Data_Ingestion];
+select SUM(price) as TotalUnitPrice
+from [SalesLT].[Sample_Data_Ingestion];
+select top 1 
+PRODUCT,
+COUNT(*) as highestSellingProducts
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY product
+order by highestSellingProducts DESC;
+select top 1
+location,
+COUNT(*) as MaxProductSellLocation
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY Location
+Order by MaxProductSellLocation DESC;
+select top 1
+Country,
+COUNT(*) as MaxProductSellCountry
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY Country
+Order by MaxProductSellCountry DESC;
+select top 1
+OrderID,
+COUNT(*) as MaxOrderPlacedByOrderID
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY OrderID
+Order by MaxOrderPlacedByOrderID DESC;
+select top 1
+Date,
+COUNT(*) as MaxOrderPlacedDate
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY Date
+Order by MaxOrderPlacedDate DESC;
+select top 1
+StoreCode,
+COUNT(*) as MaxOrderPlacedStoreCode
+from [SalesLT].[Sample_Data_Ingestion]
+GROUP BY StoreCode
+Order by MaxOrderPlacedStoreCode DESC;
+
+
+
