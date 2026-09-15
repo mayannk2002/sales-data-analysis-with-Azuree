@@ -1,4 +1,4 @@
-# sales-data-analysis-with-Azuree
+# sales-data-analysis-with-Azure
 ⦁	Transform the raw sales data to create meaningful insights.
 ⦁	Calculate total sales, average order value, and other relevant metrics.
 ⦁	Enrich the dataset with additional fields .
